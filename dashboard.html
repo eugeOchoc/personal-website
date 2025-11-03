@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Dashboard - Tech Stock Insights</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 2L4 8V14C4 21.732 9.373 28.413 16 30C22.627 28.413 28 21.732 28 14V8L16 2Z" fill="url(#logoGradient)" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 16L15 19L20 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="logoGradient" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#2563eb"/>
+                            <stop offset="1" stop-color="#7c3aed"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>Athena</span>
+            </a>
+            <div class="nav-links">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#news" class="nav-link">News</a>
+                <a href="#stocks" class="nav-link">Stock Picks</a>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">DM</div>
+                <div class="user-info">
+                    <div class="user-name">Debbie Mayer</div>
+                    <div class="user-role">Investor</div>
+                </div>
+                <button class="user-menu-toggle" aria-label="User menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="dashboard-title">Welcome back, Debbie</h1>
+                    <p class="dashboard-subtitle">Here are your personalized recommendations based on your investment profile</p>
+                </div>
+                <div class="header-actions">
+                    <div class="last-updated">
+                        <span class="update-label">Last Updated:</span>
+                        <span class="update-time" id="lastUpdated">Just now</span>
+                    </div>
+                    <button class="btn-refresh" id="refreshBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI Section -->
+    <section id="dashboard" class="kpi-section">
+        <div class="container">
+            <div class="kpi-grid">
+                <!-- KPI 1: Market Sentiment Index -->
+                <div class="kpi-card" data-tooltip="Market refers to the overall tech sector, including major indices like NASDAQ-100 and tech-heavy stocks. Sentiment is measured through news analysis, social media trends, and options market indicators.">
+                    <div class="kpi-header">
+                        <div class="kpi-icon market-sentiment">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-info">
+                            <h3 class="kpi-title">Market Sentiment
+                                <svg class="info-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </h3>
+                            <p class="kpi-description">Tech sector mood indicator</p>
+                        </div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-main-value">
+                            <span class="kpi-value" id="sentimentValue">72</span>
+                            <span class="kpi-unit">/100</span>
+                        </div>
+                        <div class="kpi-change positive" id="sentimentChange">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                            </svg>
+                            <span>+5.2%</span>
+                        </div>
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                    <div class="kpi-footer">
+                        <span class="kpi-label">Status:</span>
+                        <span class="kpi-status bullish" id="sentimentStatus">Bullish</span>
+                    </div>
+                </div>
+
+                <!-- KPI 2: Developer Activity Index -->
+                <div class="kpi-card" data-tooltip="Developer Activity tracks GitHub commits, repository stars, and open-source contributions for tech companies. High developer engagement often predicts future product innovation and ecosystem strength—a leading indicator that mainstream investors typically miss.">
+                    <div class="kpi-header">
+                        <div class="kpi-icon dev-activity">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <div class="kpi-info">
+                            <h3 class="kpi-title">Developer Activity
+                                <svg class="info-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </h3>
+                            <p class="kpi-description">GitHub commits & releases</p>
+                        </div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-main-value">
+                            <span class="kpi-value" id="devActivityValue">8.4</span>
+                            <span class="kpi-unit">K</span>
+                        </div>
+                        <div class="kpi-change positive" id="devActivityChange">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                            </svg>
+                            <span>+12.8%</span>
+                        </div>
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="devActivityChart"></canvas>
+                    </div>
+                    <div class="kpi-footer">
+                        <span class="kpi-label">Trend:</span>
+                        <span class="kpi-status high" id="devActivityStatus">High Growth</span>
+                    </div>
+                </div>
+
+                <!-- KPI 3: Portfolio Performance -->
+                <div class="kpi-card" data-tooltip="Your Portfolio Performance shows your 30-day returns compared to the S&P 500 benchmark. This measures whether your tech-focused strategy is generating alpha (excess returns) beyond what you'd get from a passive index fund.">
+                    <div class="kpi-header">
+                        <div class="kpi-icon portfolio">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="kpi-info">
+                            <h3 class="kpi-title">Your Portfolio
+                                <svg class="info-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </h3>
+                            <p class="kpi-description">30-day return vs S&P 500</p>
+                        </div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-main-value">
+                            <span class="kpi-value" id="portfolioValue">+18.3</span>
+                            <span class="kpi-unit">%</span>
+                        </div>
+                        <div class="kpi-change positive" id="portfolioChange">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="18 15 12 9 6 15"></polyline>
+                            </svg>
+                            <span>+3.1% vs SPY</span>
+                        </div>
+                    </div>
+                    <div class="kpi-chart">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                    <div class="kpi-footer">
+                        <span class="kpi-label">Performance:</span>
+                        <span class="kpi-status outperforming" id="portfolioStatus">Outperforming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stock Picks Section -->
+    <section id="stocks" class="stock-picks-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your Personalized Stock Picks</h2>
+                <p class="section-subtitle">Based on your investment history and risk profile</p>
+                <div class="risk-profile">
+                    <span class="risk-label">Your Risk Profile:</span>
+                    <div class="risk-scale">
+                        <div class="risk-option active">
+                            <span class="risk-number">1</span>
+                            <span class="risk-text">Conservative</span>
+                        </div>
+                        <div class="risk-option">
+                            <span class="risk-number">2</span>
+                            <span class="risk-text">Moderate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-picks-grid">
+                <!-- Stock Pick 1 -->
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div class="stock-symbol">NVDA</div>
+                        <div class="stock-price">
+                            <span class="price">$875.32</span>
+                            <span class="price-change positive">+2.4%</span>
+                        </div>
+                    </div>
+                    <h3 class="stock-name">NVIDIA Corporation</h3>
+                    <div class="stock-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Confidence</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="metric-value">92%</span>
+                        </div>
+                    </div>
+                    <p class="stock-reason">Strong AI chip demand, expanding data center revenue, solid developer ecosystem growth</p>
+                    <div class="stock-risk">
+                        <span class="risk-badge risk-2">Risk Level: 2 (Moderate)</span>
+                    </div>
+                    <button class="btn-details">View Analysis</button>
+                </div>
+
+                <!-- Stock Pick 2 -->
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div class="stock-symbol">MSFT</div>
+                        <div class="stock-price">
+                            <span class="price">$412.15</span>
+                            <span class="price-change positive">+1.8%</span>
+                        </div>
+                    </div>
+                    <h3 class="stock-name">Microsoft Corporation</h3>
+                    <div class="stock-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Confidence</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="metric-value">88%</span>
+                        </div>
+                    </div>
+                    <p class="stock-reason">Azure cloud growth, OpenAI integration driving enterprise adoption, strong free cash flow</p>
+                    <div class="stock-risk">
+                        <span class="risk-badge risk-1">Risk Level: 1 (Conservative)</span>
+                    </div>
+                    <button class="btn-details">View Analysis</button>
+                </div>
+
+                <!-- Stock Pick 3 -->
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div class="stock-symbol">PLTR</div>
+                        <div class="stock-price">
+                            <span class="price">$28.45</span>
+                            <span class="price-change positive">+5.2%</span>
+                        </div>
+                    </div>
+                    <h3 class="stock-name">Palantir Technologies</h3>
+                    <div class="stock-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Confidence</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="metric-value">85%</span>
+                        </div>
+                    </div>
+                    <p class="stock-reason">Government contract expansion, AI platform adoption accelerating, improving profitability</p>
+                    <div class="stock-risk">
+                        <span class="risk-badge risk-2">Risk Level: 2 (Moderate)</span>
+                    </div>
+                    <button class="btn-details">View Analysis</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Curated Tech News</h2>
+                <p class="section-subtitle">Latest developments affecting your investments</p>
+            </div>
+            <div class="news-grid">
+                <!-- News Item 1 -->
+                <article class="news-card featured">
+                    <div class="news-badge">Breaking</div>
+                    <div class="news-category ai">AI Infrastructure</div>
+                    <h3 class="news-title">NVIDIA Announces Next-Gen AI Chips with 40% Performance Boost</h3>
+                    <p class="news-excerpt">
+                        New Blackwell Ultra architecture promises significant improvements in AI training efficiency, 
+                        potentially strengthening NVIDIA's market position in the data center segment.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">Reuters</span>
+                        <span class="news-time">2 hours ago</span>
+                        <div class="news-impact high">High Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Affects:</span>
+                        <span class="stock-tag">NVDA</span>
+                        <span class="stock-tag">AMD</span>
+                    </div>
+                </article>
+
+                <!-- News Item 2 -->
+                <article class="news-card">
+                    <div class="news-category cloud">Cloud Computing</div>
+                    <h3 class="news-title">Microsoft Azure Reports 30% YoY Growth in Q4</h3>
+                    <p class="news-excerpt">
+                        Strong enterprise demand for AI services drives Azure's continued expansion, 
+                        with particular strength in OpenAI-powered solutions.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">Bloomberg</span>
+                        <span class="news-time">5 hours ago</span>
+                        <div class="news-impact medium">Medium Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Affects:</span>
+                        <span class="stock-tag">MSFT</span>
+                        <span class="stock-tag">GOOGL</span>
+                    </div>
+                </article>
+
+                <!-- News Item 3 -->
+                <article class="news-card">
+                    <div class="news-category saas">Enterprise SaaS</div>
+                    <h3 class="news-title">Palantir Secures $500M Defense Contract Extension</h3>
+                    <p class="news-excerpt">
+                        Multi-year agreement extends Palantir's relationship with U.S. Department of Defense, 
+                        providing revenue visibility through 2027.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">CNBC</span>
+                        <span class="news-time">8 hours ago</span>
+                        <div class="news-impact high">High Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Affects:</span>
+                        <span class="stock-tag">PLTR</span>
+                    </div>
+                </article>
+
+                <!-- News Item 4 -->
+                <article class="news-card">
+                    <div class="news-category semiconductors">Semiconductors</div>
+                    <h3 class="news-title">TSMC Reports Strong Demand for 3nm Process Technology</h3>
+                    <p class="news-excerpt">
+                        Taiwan Semiconductor's advanced node capacity fully booked through 2025, 
+                        signaling robust demand for cutting-edge chips.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">Financial Times</span>
+                        <span class="news-time">12 hours ago</span>
+                        <div class="news-impact medium">Medium Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Affects:</span>
+                        <span class="stock-tag">TSM</span>
+                        <span class="stock-tag">NVDA</span>
+                        <span class="stock-tag">AAPL</span>
+                    </div>
+                </article>
+
+                <!-- News Item 5 -->
+                <article class="news-card">
+                    <div class="news-category market">Market Trends</div>
+                    <h3 class="news-title">Tech Sector Leads S&P 500 with 8% Monthly Gain</h3>
+                    <p class="news-excerpt">
+                        Technology stocks outperform broader market as investors bet on AI-driven growth, 
+                        with semiconductor and cloud stocks leading the rally.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">Wall Street Journal</span>
+                        <span class="news-time">1 day ago</span>
+                        <div class="news-impact low">Low Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Sector-wide</span>
+                    </div>
+                </article>
+
+                <!-- News Item 6 -->
+                <article class="news-card">
+                    <div class="news-category developer">Developer Signals</div>
+                    <h3 class="news-title">GitHub Activity Surges for AI/ML Repositories</h3>
+                    <p class="news-excerpt">
+                        Open-source AI projects see 45% increase in contributions, indicating strong 
+                        developer interest and ecosystem growth.
+                    </p>
+                    <div class="news-meta">
+                        <span class="news-source">TechCrunch</span>
+                        <span class="news-time">1 day ago</span>
+                        <div class="news-impact medium">Medium Impact</div>
+                    </div>
+                    <div class="news-stocks">
+                        <span class="affected-label">Ecosystem indicator</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-box">
+                <svg class="disclaimer-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <div class="disclaimer-content">
+                    <h3 class="disclaimer-title">Investment Disclaimer</h3>
+                    <p class="disclaimer-text">All investments carry risk, and there is no guarantee of returns, as the value of investments can fluctuate and past performance is not a reliable indicator of future results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Athena. Data for informational purposes only. Not financial advice.</p>
+        </div>
+    </footer>
+
+    <script src="dashboard-script.js"></script>
+</body>
+</html>
