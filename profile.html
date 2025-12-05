@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Debbie Meyers | Athena</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="https://funny-clafoutis-2172ec.netlify.app/" class="logo">Athena</a>
+            <div class="nav-links">
+                <a href="profile.html" class="nav-link active">Profile</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <section class="profile-header">
+        <div class="container">
+            <div class="profile-header-content">
+                <div class="profile-avatar-section">
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Debbie+Meyers&size=200&background=2563eb&color=fff&bold=true" alt="Profile" id="avatarImage">
+                        <button class="avatar-upload-btn" id="uploadBtn">
+                            <span>📷</span>
+                        </button>
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profileName">Debbie Meyers</h1>
+                    <p class="profile-title" id="profileTitle">Aspiring Investor</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Stocks Tracked</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$250K</div>
+                            <div class="stat-label">Portfolio Value</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">+18.3%</div>
+                            <div class="stat-label">YTD Return</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <div class="container">
+            <div class="profile-grid">
+                
+                <!-- Personal Information -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Personal Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-group">
+                            <label class="info-label">Full Name</label>
+                            <div class="info-value" id="fullName">Debbie Meyers</div>
+                            <input type="text" class="info-input" id="fullNameInput" value="Debbie Meyers" style="display: none;">
+                        </div>
+                        <div class="info-group">
+                            <label class="info-label">Email</label>
+                            <div class="info-value" id="email">debbie@meyers.com</div>
+                            <input type="email" class="info-input" id="emailInput" value="debbie@meyers.com" style="display: none;">
+                        </div>
+                        <div class="info-group">
+                            <label class="info-label">Location</label>
+                            <div class="info-value" id="location">San Jose, California</div>
+                            <input type="text" class="info-input" id="locationInput" value="San Jose, California" style="display: none;">
+                        </div>
+                        <div class="info-group">
+                            <label class="info-label">Bio</label>
+                            <div class="info-value" id="bio">Learning to invest in tech stocks while balancing my day job. Interested in AI and emerging technologies, and exploring how to grow my savings through smart, long-term investments.</div>
+                            <textarea class="info-input" id="bioInput" rows="3" style="display: none;">Learning to invest in tech stocks while balancing my day job. Interested in AI and emerging technologies, and exploring how to grow my savings through smart, long-term investments.</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Profile -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Investment Risk Profile</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="risk-profile-selector">
+                            <div class="risk-option" data-risk="conservative">
+                                <div class="risk-icon">🛡️</div>
+                                <div class="risk-name">Conservative</div>
+                                <div class="risk-description">Low risk, stable returns</div>
+                            </div>
+                            <div class="risk-option active" data-risk="moderate">
+                                <div class="risk-icon">⚖️</div>
+                                <div class="risk-name">Moderate</div>
+                                <div class="risk-description">Balanced risk-reward</div>
+                            </div>
+                            <div class="risk-option" data-risk="aggressive">
+                                <div class="risk-icon">🚀</div>
+                                <div class="risk-name">Aggressive</div>
+                                <div class="risk-description">High risk, high potential</div>
+                            </div>
+                        </div>
+                        <div class="risk-details">
+                            <div class="risk-metric">
+                                <span class="metric-label">Risk Tolerance:</span>
+                                <span class="metric-value" id="riskTolerance">Moderate</span>
+                            </div>
+                            <div class="risk-metric">
+                                <span class="metric-label">Investment Horizon:</span>
+                                <span class="metric-value" id="investmentHorizon">5-10 years</span>
+                            </div>
+                            <div class="risk-metric">
+                                <span class="metric-label">Preferred Sectors:</span>
+                                <span class="metric-value" id="preferredSectors">Technology, AI, Food Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferred Stocks -->
+                <div class="profile-card full-width">
+                    <div class="card-header">
+                        <h2 class="card-title">Preferred Stocks</h2>
+                        <button class="btn-icon" id="addStockBtn">+ Add Stock</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="stocks-grid" id="stocksGrid">
+                            <div class="stock-item" data-symbol="NVDA">
+                                <div class="stock-header">
+                                    <div class="stock-symbol">NVDA</div>
+                                    <button class="stock-remove" data-symbol="NVDA">×</button>
+                                </div>
+                                <div class="stock-name">NVIDIA Corporation</div>
+                                <div class="stock-reason">Leading AI chip manufacturer with strong growth potential</div>
+                                <div class="stock-allocation">
+                                    <span class="allocation-label">Portfolio %:</span>
+                                    <span class="allocation-value">30%</span>
+                                </div>
+                            </div>
+                            <div class="stock-item" data-symbol="MSFT">
+                                <div class="stock-header">
+                                    <div class="stock-symbol">MSFT</div>
+                                    <button class="stock-remove" data-symbol="MSFT">×</button>
+                                </div>
+                                <div class="stock-name">Microsoft Corporation</div>
+                                <div class="stock-reason">Azure cloud growth and OpenAI integration</div>
+                                <div class="stock-allocation">
+                                    <span class="allocation-label">Portfolio %:</span>
+                                    <span class="allocation-value">25%</span>
+                                </div>
+                            </div>
+                            <div class="stock-item" data-symbol="PLTR">
+                                <div class="stock-header">
+                                    <div class="stock-symbol">PLTR</div>
+                                    <button class="stock-remove" data-symbol="PLTR">×</button>
+                                </div>
+                                <div class="stock-name">Palantir Technologies</div>
+                                <div class="stock-reason">AI platform adoption and government contracts</div>
+                                <div class="stock-allocation">
+                                    <span class="allocation-label">Portfolio %:</span>
+                                    <span class="allocation-value">20%</span>
+                                </div>
+                            </div>
+                            <div class="stock-item" data-symbol="GOOGL">
+                                <div class="stock-header">
+                                    <div class="stock-symbol">GOOGL</div>
+                                    <button class="stock-remove" data-symbol="GOOGL">×</button>
+                                </div>
+                                <div class="stock-name">Alphabet Inc.</div>
+                                <div class="stock-reason">Search dominance and AI innovation</div>
+                                <div class="stock-allocation">
+                                    <span class="allocation-label">Portfolio %:</span>
+                                    <span class="allocation-value">15%</span>
+                                </div>
+                            </div>
+                            <div class="stock-item" data-symbol="TSLA">
+                                <div class="stock-header">
+                                    <div class="stock-symbol">TSLA</div>
+                                    <button class="stock-remove" data-symbol="TSLA">×</button>
+                                </div>
+                                <div class="stock-name">Tesla Inc.</div>
+                                <div class="stock-reason">EV market leader with autonomous driving tech</div>
+                                <div class="stock-allocation">
+                                    <span class="allocation-label">Portfolio %:</span>
+                                    <span class="allocation-value">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Social Links</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="social-links">
+                            <a href="#" class="social-link" target="_blank">
+                                <span class="social-icon">💼</span>
+                                <span class="social-name">LinkedIn</span>
+                            </a>
+                            <a href="#" class="social-link" target="_blank">
+                                <span class="social-icon">📊</span>
+                                <span class="social-name">Portfolio Tracker</span>
+                            </a>
+                            <a href="mailto:debbie@meyers.com" class="social-link">
+                                <span class="social-icon">📧</span>
+                                <span class="social-name">Email</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferences -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Preferences</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="preference-item">
+                            <div class="preference-label">
+                                <span>Email Notifications</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="preference-item">
+                            <div class="preference-label">
+                                <span>Market Alerts</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="marketAlerts" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="preference-item">
+                            <div class="preference-label">
+                                <span>Weekly Reports</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="weeklyReports">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Stock Modal -->
+    <div class="modal" id="addStockModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Preferred Stock</h3>
+                <button class="modal-close" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Stock Symbol</label>
+                    <input type="text" id="newStockSymbol" placeholder="e.g., AAPL" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="newStockName" placeholder="e.g., Apple Inc." class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Reason for Interest</label>
+                    <textarea id="newStockReason" placeholder="Why are you interested in this stock?" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Portfolio Allocation (%)</label>
+                    <input type="number" id="newStockAllocation" placeholder="e.g., 10" min="0" max="100" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelAddStock">Cancel</button>
+                <button class="btn btn-primary" id="confirmAddStock">Add Stock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Athena. Data for informational purposes only. Not financial advice.</p>
+        </div>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+</html>
