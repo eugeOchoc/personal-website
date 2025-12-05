@@ -769,9 +769,7 @@ textarea.form-input {
         width: 150px;
         height: 150px;
     }
-}
 
-@media (max-width: 768px) {
     .mobile-menu-toggle {
         display: flex;
     }
